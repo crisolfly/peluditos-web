@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Peluditos de Vicálvaro - Protección Felina</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #2e4d3a;
+      --secondary: #ff9933;
+      --light: #f5f9f3;
+      --dark: #1c2d22;
+      --accent: #a8d0b4;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Open Sans', sans-serif;
+      background-color: var(--light);
+      color: var(--dark);
+      scroll-behavior: smooth;
+    }
+
+    /* Navigation */
+    .navbar {
+      position: fixed;
+      width: 100%;
+      top: 0;
+      left: 0;
+      background: var(--dark);
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 1000;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    .navbar h1 {
+      color: var(--secondary);
+      font-size: 1.5em;
+      margin: 0;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 25px;
+    }
+
+    .nav-links a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: var(--secondary);
+    }
+
+    /* Hero Section */
+    .hero {
+      background: linear-gradient(to right, var(--accent), var(--light));
+      padding: 120px 20px 80px;
+      text-align: center;
+      margin-top: 70px;
+    }
+
+    .hero h2 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 2.5em;
+      margin: 0;
+      color: var(--primary);
+    }
+
+    .hero p {
+      font-size: 1.2em;
+      margin: 15px 0 30px;
+      color: var(--dark);
+    }
+
+    .hero .cta {
+      background: var(--secondary);
+      color: white;
+      padding: 15px 30px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: all 0.3s;
+    }
+
+    .hero .cta:hover {
+      background: #e68a2e;
+      transform: scale(1.05);
+    }
+
+    /* Cards */
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+      padding: 40px 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .card {
+      background: white;
+      border-radius: 15px;
+      padding: 25px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+    }
+
+    .card h3 {
+      font-family: 'Montserrat', sans-serif;
+      color: var(--primary);
+      margin-top: 0;
+    }
+
+    .card p {
+      line-height: 1.6;
+    }
+
+    /* Photo Gallery */
+    .gallery {
+      padding: 40px 20px;
+      background: #f0f6ed;
+    }
+
+    .gallery h2 {
+      text-align: center;
+      font-family: 'Montserrat', sans-serif;
+      color: var(--primary);
+      margin-bottom: 30px;
+    }
+
+    .carousel {
+      position: relative;
+      max-width: 1000px;
+      margin: 0 auto;
+      overflow: hidden;
+      border-radius: 15px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    }
+
+    .carousel-track {
+      display: flex;
+      transition: transform 0.5s ease-in-out;
+    }
+
+    .carousel-item {
+      min-width: 100%;
+      box-sizing: border-box;
+    }
+
+    .carousel-item img {
+      width: 100%;
+      height: 400px;
+      object-fit: cover;
+      border-radius: 15px;
+    }
+
+    .carousel-nav {
+      position: absolute;
+      top: 50%;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      transform: translateY(-50%);
+    }
+
+    .carousel-nav button {
+      background: rgba(0,0,0,0.5);
+      color: white;
+      border: none;
+      padding: 10px;
+      font-size: 1.5em;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .carousel-nav button:hover {
+      background: rgba(0,0,0,0.7);
+    }
+
+    /* Testimonials */
+    .testimonials {
+      padding: 40px 20px;
+      background: var(--light);
+    }
+
+    .testimonial {
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+      background: white;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+      font-style: italic;
+      position: relative;
+    }
+
+    .testimonial::before {
+      content: '“';
+      font-size: 4em;
+      color: var(--secondary);
+      position: absolute;
+      top: -20px;
+      left: -10px;
+      opacity: 0.3;
+    }
+
+    .testimonial::after {
+      content: '”';
+      font-size: 4em;
+      color: var(--secondary);
+      position: absolute;
+      bottom: -20px;
+      right: -10px;
+      opacity: 0.3;
+    }
+
+    /* Donation Form */
+    #donar {
+      background: var(--light);
+      padding: 40px 20px;
+      text-align: center;
+    }
+
+    #donar h2 {
+      font-family: 'Montserrat', sans-serif;
+      color: var(--primary);
+      margin-bottom: 20px;
+    }
+
+    .donation-form {
+      max-width: 600px;
+      margin: 0 auto;
+      background: white;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    }
+
+    .donation-form input,
+    .donation-form textarea,
+    .donation-form select {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0 20px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      font-size: 1em;
+    }
+
+    .donation-form button {
+      background: var(--secondary);
+      color: white;
+      border: none;
+      padding: 12px 25px;
+      border-radius: 8px;
+      font-size: 1em;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .donation-form button:hover {
+      background: #e68a2e;
+      transform: scale(1.05);
+    }
+
+    /* Map */
+    #map {
+      height: 400px;
+      margin: 40px 0;
+    }
+
+    /* Footer */
+    footer {
+      background: var(--dark);
+      color: white;
+      text-align: center;
+      padding: 30px 20px;
+    }
+
+    .social-icons {
+      margin: 15px 0;
+    }
+
+    .social-icons a {
+      color: white;
+      margin: 0 10px;
+      text-decoration: none;
+      font-size: 1.5em;
+      transition: color 0.3s;
+    }
+
+    .social-icons a:hover {
+      color: var(--secondary);
+    }
+
+    /* Floating Button */
+    .floating-donate {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: var(--secondary);
+      color: white;
+      padding: 15px 25px;
+      border-radius: 30px;
+      font-weight: bold;
+      text-decoration: none;
+      z-index: 1000;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      transition: all 0.3s;
+    }
+
+    .floating-donate:hover {
+      background: #e68a2e;
+      transform: scale(1.05);
+    }
+
+    @media (max-width: 768px) {
+      .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 10px;
+      }
+
+      .nav-links {
+        flex-direction: column;
+        gap: 10px;
+        margin-top: 10px;
+      }
+
+      .hero h2 {
+        font-size: 1.8em;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar">
+    <h1>PELUDITOS DE VICALVARO</h1>
+    <div class="nav-links">
+      <a href="#quienes-somos">Quiénes somos</a>
+      <a href="#nuestro-trabajo">Nuestro trabajo</a>
+      <a href="#como-ayudar">Cómo ayudar</a>
+      <a href="#donar">Donar</a>
+      <a href="#contacto">Contacto</a>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <h2>Protegiendo a los felinos de Vicálvaro desde 2018</h2>
+    <p>Trabajamos por el bienestar animal mediante el método CER (Captura, Esterilización y Retorno)</p>
+    <a href="#donar" class="cta">Haz una donación ahora</a>
+  </section>
+
+  <!-- Cards Section -->
+  <section id="quienes-somos" class="cards">
+    <div class="card">
+      <h3>Misión</h3>
+      <p>Proteger y mejorar la calidad de vida de los gatos callejeros en Vicálvaro mediante métodos éticos y sostenibles.</p>
+    </div>
+    <div class="card">
+      <h3>Visión</h3>
+      <p>Ser reconocidos como una organización de referencia en el control poblacional responsable y el bienestar animal en Madrid.</p>
+    </div>
+    <div class="card">
+      <h3>Valores</h3>
+      <p>Compasión, transparencia, colaboración comunitaria y compromiso con la educación ambiental.</p>
+    </div>
+  </section>
+
+  <!-- Gallery Section -->
+  <section class="gallery">
+    <h2>Nuestro Trabajo en Imágenes</h2>
+    <div class="carousel">
+      <div class="carousel-track" id="carouselTrack">
+        <div class="carousel-item">
+          <img src="https://images.unsplash.com/photo-1606757372451-0e7c0db2698f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1500&q=80" alt="Gato esterilizado">
+        </div>
+        <div class="carousel-item">
+          <img src="https://images.unsplash.com/photo-1611859603-90271822f308?ixlib=rb-4.0.3&auto=format&fit=crop&w=1500&q=80" alt="Equipo de voluntarios">
+        </div>
+        <div class="carousel-item">
+          <img src="https://images.unsplash.com/photo-1585909551122-88e5e1f0f6c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1500&q=80" alt="Proceso de esterilización">
+        </div>
+        <div class="carousel-item">
+          <img src="https://images.unsplash.com/photo-1611859603-90271822f308?ixlib=rb-4.0.3&auto=format&fit=crop&w=1500&q=80" alt="Gato en su entorno">
+        </div>
+      </div>
+      <div class="carousel-nav">
+        <button onclick="prevSlide()">❮</button>
+        <button onclick="nextSlide()">❯</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials Section -->
+  <section class="testimonials">
+    <div class="testimonial">
+      "Desde que colaboro con Peluditos de Vicálvaro, he visto cómo se reduce el sufrimiento de los gatos callejeros. Es un honor ser parte de este cambio positivo."
+      <br><br>
+      <strong>- Ana M., Voluntaria</strong>
+    </div>
+  </section>
+
+  <!-- Our Work Section -->
+  <section id="nuestro-trabajo" class="cards">
+    <div class="card">
+      <h3>Impacto 2024</h3>
+      <ul>
+        <li>✅ 250 gatos esterilizados</li>
+        <li>✅ 18 colonias gestionadas</li>
+        <li>✅ 90% de éxito en capturas</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>El Método CER</h3>
+      <p>1. Captura humana de los gatos<br>
+         2. Esterilización y marcaje (recorte de oreja)<br>
+         3. Retorno al entorno natural del animal</p>
+    </div>
+    <div class="card">
+      <h3>Beneficios</h3>
+      <p>Reduce el sufrimiento animal<br>
+         Disminuye la población sin control<br>
+         Mejora la salud pública<br>
+         Evita la crueldad de métodos antiguos</p>
+    </div>
+  </section>
+
+  <!-- How to Help Section -->
+  <section id="como-ayudar" class="cards">
+    <div class="card">
+      <h3>Donaciones</h3>
+      <p>Cada aporte cuenta: desde 5€ cubres parte del coste de una esterilización. ¡Tu ayuda salva vidas!</p>
+    </div>
+    <div class="card">
+      <h3>Voluntariado</h3>
+      <p>Ayúdanos en capturas, transporte o cuidados post-operatorios. ¡No necesitas experiencia!</p>
+    </div>
+    <div class="card">
+      <h3>Difusión</h3>
+      <p>Comparte nuestro trabajo en redes sociales y ayuda a concienciar sobre el bienestar animal.</p>
+    </div>
+  </section>
+
+  <!-- Donation Form -->
+  <section id="donar">
+    <h2>Haz una Donación</h2>
+    <div class="donation-form">
+      <form>
+        <input type="text" placeholder="Nombre Completo" required>
+        <input type="email" placeholder="Correo Electrónico" required>
+        <select>
+          <option selected disabled>Monto a donar</option>
+          <option value="5">5€ - Una esterilización</option>
+          <option value="10">10€ - Alimentación mensual</option>
+          <option value="20">20€ - Medicamentos</option>
+          <option value="other">Otro monto</option>
+        </select>
+        <textarea rows="4" placeholder="Mensaje opcional"></textarea>
+        <button type="submit">Proceder a pagar</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Map Section -->
+  <section id="contacto">
+    <h2 style="text-align:center; font-family: 'Montserrat', sans-serif; color: var(--primary); padding: 20px;">Ubicación</h2>
+    <div id="map"></div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <h2>Redes Sociales</h2>
+    <div class="social-icons">
+      <a href="#" title="Instagram">&#x1F408;</a>
+      <a href="#" title="Facebook">&#x1F408;</a>
+      <a href="#" title="Twitter">&#x1F408;</a>
+    </div>
+    <p>Email: contacto@peluditosvicallvaro.org</p>
+    <p>Juntos por un mundo más humano para los animales</p>
+  </footer>
+
+  <!-- Floating Donate Button -->
+  <a href="#donar" class="floating-donate">Donar ahora</a>
+
+  <script>
+    // Carousel functionality
+    let currentIndex = 0;
+    const totalSlides = document.querySelectorAll('.carousel-item').length;
+
+    function updateCarousel() {
+      const track = document.getElementById('carouselTrack');
+      track.style.transform = `translateX(-${currentIndex * 100}%)`;
+    }
+
+    function nextSlide() {
+      currentIndex = (currentIndex + 1) % totalSlides;
+      updateCarousel();
+    }
+
+    function prevSlide() {
+      currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+      updateCarousel();
+    }
+
+    // Map initialization
+    function initMap() {
+      const vicálvaro = { lat: 40.4168, lng: -3.7038 }; // Coordenadas de ejemplo
+      const map = new google.maps.Map(document.getElementById("map"), {
+        center: vicálvaro,
+        zoom: 12,
+      });
+      new google.maps.Marker({
+        position: vicálvaro,
+        map: map,
+        title: "Peluditos de Vicálvaro",
+      });
+    }
+  </script>
+  <script async defer src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap"></script>
+</body>
+</html>
